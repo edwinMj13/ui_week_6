@@ -52,7 +52,7 @@ class _Manage_TwoState extends State<Manage_Two> {
       child: GridView.builder(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: 5 / 4,
+          childAspectRatio: 4.3 / 4,
           crossAxisCount: 2,
         ),
         itemBuilder: (BuildContext context, int index) {
@@ -77,7 +77,10 @@ class _Manage_TwoState extends State<Manage_Two> {
                           ),
                           height: 50,
                           width: 50,
-                          child: SvgPicture.asset(datas[index].icon)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: SvgPicture.asset(datas[index].icon),
+                          )),
                        Visibility(visible: isWidgetVisible, child: Container(
                          alignment: Alignment.topCenter,
                          decoration: BoxDecoration(

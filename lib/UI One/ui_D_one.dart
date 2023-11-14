@@ -69,7 +69,7 @@ class _Design_OneState extends State<Design_One> {
                 padding: EdgeInsets.all(15.0),
                 child: Row(
                   children: [
-                    Image.asset("assets/whatsap_icon.png"),
+                    Image.asset("assets/whatsapp_icon.png",width: 30,height: 30,),
                     const SizedBox(
                       width: 10,
                     ),

@@ -40,47 +40,65 @@ class _Design_SevenState extends State<Design_Seven> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  child: Column(children: [
-                    Container(
-                      child: ClipOval(
-                          child: SizedBox.fromSize(
-                            size: const Size.fromRadius(100.0),
-                            child: file == null
-                                ? const Icon(
-                              Icons.person,
-                              size: 100,
+                padding: const EdgeInsets.all(20.0),
+                child: Container(width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.0),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 5.0,
+                        spreadRadius: 0.0,
+                        offset: Offset(1.0, 1.0), // shadow direction: bottom right
+                      )
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Column(children: [
+                      Container(
+                        child: ClipOval(
+                            child: SizedBox.fromSize(
+                              size: const Size.fromRadius(70.0),
+                              child: file == null
+                                  ? const Icon(
+                                Icons.person,
+                                size: 70,
+                              )
+                                  : Image.file(
+                                file!,
+                                width: 150,
+                                height: 150,
+                                fit: BoxFit.cover,
+                              ),
                             )
-                                : Image.file(
-                              file!,
-                              fit: BoxFit.cover,
-                            ),
-                          )),
-                    ),
-                    ElevatedButton(
-                        onPressed: () {
-                          openCamera();
-                        },
-                        child: const Text(
-                          "Open Camera",
-                          style: TextStyle(color: Colors.white),
-                        )
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.deepPurple,width: 1),
-                        borderRadius: BorderRadius.circular(50.0),
+                        ),
                       ),
-                      child: IconButton(onPressed: (){
-                        saveLocalImage();
-                        //   writeCounter( "one");
-                      }, icon: const Icon(Icons.save,size: 30,color: Colors.deepPurple,)),
-                    ),
-                  ],),
+                      ElevatedButton(
+                          onPressed: () {
+                            openCamera();
+                          },
+                          child: const Text(
+                            "Open Camera",
+                            style: TextStyle(color: Colors.white),
+                          )
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.deepPurple,width: 1),
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
+                        child: IconButton(onPressed: (){
+                          saveLocalImage();
+                          //   writeCounter( "one");
+                        }, icon: const Icon(Icons.save,size: 30,color: Colors.deepPurple,)),
+                      ),
+                    ],),
+                  ),
                 ),
               ),
               Expanded(
@@ -197,12 +215,15 @@ class _Design_SevenState extends State<Design_Seven> {
     }*/
    //   final myimgDIR = await Directory(imgPATH).create();
 //var compressing=File("$imgPATH/img.jpg")..writeAsBytesSync(file)
-String imageName=DateTime.now().microsecond.toString();
+String imageName=DateTime.now().millisecondsSinceEpoch.toString();
 
       final paths = File("${directory.path}/$imageName.jpg");
       await paths.writeAsBytes(imgBytes);
     final result = await ImageGallerySaver.saveFile(paths.path,);
-num a=10;
+//num a=10;
+    if(file!=null) {
+      file = null;
+    }
     setState((){ });
 
      //  final params = SaveFileDialogParams(sourceFilePath: paths.path);

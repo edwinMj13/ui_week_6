@@ -37,7 +37,8 @@ class HomeScreen extends StatelessWidget {
     "Design 4",
     "Design 5",
     "Design 6",
-    "Design 7"
+    "Design 7",
+    "Design 8"
   ];
 
   @override
@@ -114,6 +115,10 @@ class HomeScreen extends StatelessWidget {
         }));
 
         break;
+      case "Design 8":
+        Navigator.of(context).push(MaterialPageRoute(builder: (ctx){
+          return Design_Seven();
+        }));
     }
   }
 }

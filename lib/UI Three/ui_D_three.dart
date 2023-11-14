@@ -214,15 +214,20 @@ class _Design_ThreeState extends State<Design_Three> {
                       const SizedBox(
                         height: 5,
                       ),
-                      Slider(
-                          value: sliderValue.toDouble(),
-                          min: 1,
-                          max: 50000,
-                          activeColor: Colors.deepPurple,
-                          inactiveColor: Colors.grey[300],
-                          onChanged: (double newVal) {
-                            sliderValue = newVal.round();
-                          }),
+                      SliderTheme(
+                        data: SliderThemeData(
+                          trackShape: CustomTrackShape(),
+                        ),
+                        child: Slider(
+                            value: sliderValue.toDouble(),
+                            min: 1,
+                            max: 50000,
+                            activeColor: Colors.deepPurple,
+                            inactiveColor: Colors.grey[300],
+                            onChanged: (double newVal) {
+                              sliderValue = newVal.round();
+                            }),
+                      ),
                       Text("$sliderValue left out of ₹50000"),
                       const SizedBox(
                         height: 5,
@@ -427,6 +432,7 @@ class _Design_ThreeState extends State<Design_Three> {
             ),
             ListView.separated(
               shrinkWrap: true,
+                physics: ScrollPhysics(),
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.only(left: 10.0, right: 10.0),
@@ -501,3 +507,19 @@ class _Design_ThreeState extends State<Design_Three> {
     );
   }
 }
+class CustomTrackShape extends RoundedRectSliderTrackShape {
+  Rect getPreferredRect({
+    required RenderBox parentBox,
+    Offset offset = Offset.zero,
+    required SliderThemeData sliderTheme,
+    bool isEnabled = false,
+    bool isDiscrete = false,
+  }) {
+    final double? trackHeight = sliderTheme.trackHeight;
+    final double trackLeft = offset.dx;
+    final double trackTop = offset.dy + (parentBox.size.height - trackHeight!) / 2;
+    final double trackWidth = parentBox.size.width;
+    return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
+  }
+}
+
